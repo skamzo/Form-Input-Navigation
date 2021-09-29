@@ -5,12 +5,11 @@ import * as ImagePicker from 'expo-image-picker';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
+import user from '../UserModel';
 
 const Stack = createNativeStackNavigator();
 
-
 export default function textInputs({navigation}){
-
 
 const[firstname, setFirsname] = useState();
 const[lastname, setLastname] = useState();
@@ -54,7 +53,7 @@ const[image, setImage] = useState(null);
      })
      console.log(result)
      if(!result.cancelled) {
-       setImage(result.uri)
+       user.setImage(result.uri)
      }
   }
 
@@ -68,26 +67,26 @@ return (
   <View style={styles.container}>
     <TextInput multiline style={styles.input} 
     placeholder= 'Please Enter Firt Name'
-    onChangeText={(val) => setFirsname(val)}/>
+    onChangeText={(firstname) => user.setFirstname(firstname)}/>
 
     <TextInput multiline style={styles.input} 
     placeholder= 'Please Enter Last Name'
-    onChangeText={(val) => setLastname(val)}/>
+    onChangeText={(lastname) => user.setLastname(lastname)}/>
 
     <TextInput multiline style={styles.input} keyboardType='numeric'
     placeholder= 'Please Enter Cell Number'
-    onChangeText={(val) => setCellphone(val)}/>
+    onChangeText={(cellphone) => user.setCellphone(cellphone)}/>
 
     
     <View style={styles.choose}>
         <Button title='Select Your Image' onPress={PickImage} />
     </View>
     <View style={styles.buttnContainer}>
-    <Button title='Add' onPress={() => {navigation.navigate('DisplayInputs',{
-      firstname:firstname,
-      lastname:lastname,
-      cellphone:cellphone,
-      image: image
+    <Button title='Add' onPress={ async () => {navigation.navigate('DisplayInputs',{
+      firstname: user.firstname,
+      lastname: user.lastname,
+      cellphone: user.cellphone,
+      image: user.image
       }
       )}} />
     </View>

@@ -4,18 +4,18 @@ import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
 
 export default function DisplayInputs({route, navigation}) {
-    const {firstname, lastname, cellphone, image} = route.params;
+    //const {firstname, lastname, cellphone, image} = route.params;
     { image && console.log(image); }
     return(
         <View style={styles.container}>
             <ScrollView>
-            <Image style={styles.image} source={{uri:image}} />
+            <Image style={styles.image} source={{uri:route.params.image}} />
             <View style={styles.card}>
-            <Text style={styles.title}>First Name: {firstname}</Text>
+            <Text style={styles.title}>First Name: {route.params.firstname}</Text>
             <Text></Text>
-            <Text style={styles.title}>Last Name: {lastname}</Text>
+            <Text style={styles.title}>Last Name: {route.params.lastname}</Text>
             <Text></Text>
-            <Text style={styles.title}>Cell Number: {cellphone}</Text>
+            <Text style={styles.title}>Cell Number: {route.params.cellphone}</Text>
             <Text></Text>
             </View>
             </ScrollView>
